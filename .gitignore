@@ -1,0 +1,9 @@
+*.ipynb_checkpoints
+data/dsm.tif
+data/dsm_3d.tif
+data/dsm_3dplus.tif
+data/dsm_3e.tif
+data/dsm_3g.tif
+data/dsmplus.tif
+output/dsm_3dplus.tif
+output/dsmplus.tif

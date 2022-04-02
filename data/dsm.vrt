@@ -1,0 +1,43 @@
+<VRTDataset rasterXSize="16704" rasterYSize="23665">
+  <SRS dataAxisToSRSAxisMapping="2,1">GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AXIS["Latitude",NORTH],AXIS["Longitude",EAST],AUTHORITY["EPSG","4326"]]</SRS>
+  <GeoTransform> -1.1135919972923642e+02,  1.6259819344379641e-05,  0.0000000000000000e+00,  4.5540955017197419e+01,  0.0000000000000000e+00, -1.1455275023780650e-05</GeoTransform>
+  <VRTRasterBand dataType="Float32" band="1" subClass="VRTDerivedRasterBand">
+    <PixelFunctionType>average</PixelFunctionType>
+    <PixelFunctionLanguage>Python</PixelFunctionLanguage>
+    <PixelFunctionCode><![CDATA[
+import numpy as np
+def average(in_ar, out_ar, xoff, yoff, xsize, ysize, raster_xsize,raster_ysize, buf_radius, gt, **kwargs):
+    x = np.ma.masked_less(in_ar, 0)
+    np.mean(x, axis = 0, out = out_ar, dtype = 'float64')
+    mask = np.all(x.mask,axis = 0)
+    out_ar[mask]=-32767
+]]>
+    </PixelFunctionCode>
+    <NoDataValue>-32767</NoDataValue>
+    <ColorInterp>Gray</ColorInterp>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">dsm_3d.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="15750" RasterYSize="15937" DataType="Float32" BlockXSize="256" BlockYSize="256" />
+      <SrcRect xOff="0" yOff="0" xSize="15750" ySize="15937" />
+      <DstRect xOff="1571.3577408378" yOff="4659.65641835917" xSize="15132.4697887896" ySize="15311.5346891173" />
+      <NODATA>-32767</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">dsm_3e.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="14387" RasterYSize="16029" DataType="Float32" BlockXSize="256" BlockYSize="256" />
+      <SrcRect xOff="0" yOff="0" xSize="14387" ySize="16029" />
+      <DstRect xOff="0" yOff="0" xSize="13670.7731073041" ySize="15215.8154567832" />
+      <NODATA>-32767</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">dsm_3g.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="8221" RasterYSize="12317" DataType="Float32" BlockXSize="256" BlockYSize="256" />
+      <SrcRect xOff="0" yOff="0" xSize="8221" ySize="12316.7788902519" />
+      <DstRect xOff="6853.92672271906" yOff="10239.9795701606" xSize="8952.59656438414" ySize="13425.0204298394" />
+      <NODATA>-32767</NODATA>
+    </ComplexSource>
+  </VRTRasterBand>
+</VRTDataset>
